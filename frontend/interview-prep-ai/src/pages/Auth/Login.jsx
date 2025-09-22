@@ -39,7 +39,7 @@ const navigate= useNavigate();
       const {token} = response.data;
       if(token){
         localStorage.setItem("token",token);
-        updateUser(response.data)
+        updateUser(response.data);
         navigate("/dashboard");
 
       }

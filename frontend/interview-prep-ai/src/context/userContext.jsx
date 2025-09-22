@@ -26,6 +26,7 @@ const UserProvider =({children}) =>{
         setUser(response.data);
       } catch (error) {
         console.error("User not authenticated");
+        clearUser();
         
       }finally{
         setLoading(false);
@@ -44,13 +45,13 @@ const updateUser = (userData) =>{
   setLoading(false);
 }
 
-const cleanUser = () =>{
+const clearUser = () =>{
   setUser(null);
   localStorage.removeItem("token");
 };
     return(
       <>
-      <UserContext.Provider value={{user , loading , updateUser , createUser}}>
+      <UserContext.Provider value={{user , loading , updateUser , clearUser}}>
         {children}
       </UserContext.Provider>
       </>
