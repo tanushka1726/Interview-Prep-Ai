@@ -1,8 +1,16 @@
 import React from 'react'
+import toast from "react-hot-toast";
+import {CARD_BG} from "../../utils/data";
+import {LuPlus} from "react-icons/lu";
+import DashboardLayout from '../../components/layouts/DashboardLayout';
+
 
 const Dashboard = () => {
   return (
-    <div className='text-2xl'>dashboard</div>
+    <DashboardLayout >
+      Dashboard
+
+    </DashboardLayout>
   )
 }
 

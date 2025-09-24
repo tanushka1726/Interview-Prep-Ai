@@ -32,7 +32,7 @@ const UserProvider =({children}) =>{
         setLoading(false);
       }
       
-    }
+    };
 
     fetchUser();
 
