@@ -7,7 +7,7 @@ import DashboardLayout from '../../components/layouts/DashboardLayout';
 const Dashboard = () => {
   return (
     <DashboardLayout >
-      Dashboard
+      Dashboard Page below navbar
 
     </DashboardLayout>
   )
