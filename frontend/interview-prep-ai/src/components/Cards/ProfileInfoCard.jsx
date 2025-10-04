@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import {UserContext} from "../../context/userContext";
 
 const ProfileInfoCard = () => {
-    const navigate = useNavigate();
+    
     const {user , clearUser} = useContext(UserContext);
+    const navigate = useNavigate();
 
     const handleLoguot = ()=>{
       localStorage.clear();
@@ -12,7 +13,7 @@ const ProfileInfoCard = () => {
       navigate("/");
     };
   return (
-    // user && (
+   user && (
 
     <div className='flex items-center'>
       <img src={user.profileImageUrl} alt="" 
@@ -30,7 +31,7 @@ const ProfileInfoCard = () => {
       </div>
     </div>
   ) 
-//  )
+ )
 }
 
 export default ProfileInfoCard
