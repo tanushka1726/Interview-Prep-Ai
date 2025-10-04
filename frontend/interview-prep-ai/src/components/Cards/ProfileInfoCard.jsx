@@ -10,10 +10,9 @@ const ProfileInfoCard = () => {
       localStorage.clear();
       clearUser();
       navigate("/");
-
-    }
+    };
   return (
-    user && (
+    // user && (
 
     <div className='flex items-center'>
       <img src={user.profileImageUrl} alt="" 
@@ -30,7 +29,8 @@ const ProfileInfoCard = () => {
         </button>
       </div>
     </div>
-  )  )
+  ) 
+//  )
 }
 
 export default ProfileInfoCard
