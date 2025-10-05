@@ -30,9 +30,7 @@ const Dashboard = () => {
 
   }
 
-  const deteleSessions = async(sessionData) =>{
-
-  }
+  const deteleSessions = async(sessionData) =>{} 
 
   useEffect (()=>{
     fetchAllSessions()
@@ -50,7 +48,7 @@ const Dashboard = () => {
             experience = {data?.experience || "-"}
             questions = {data?.questions?.length || "-"}
             description = {data?.description || ""}
-            lastUpdated = {data?.updatedAt? moment(data.updatedAt).format("Do MM YYYY"):""}
+            lastUpdated = {data?.updatedAt?moment(data.updatedAt).format("Do MM YYYY"):""}
             onselect = {() => navigate(`/interview-prep/${data?._id}`)}
             ondelete = {() => setOpenDeleteAlert({open: true , data})}
             />
