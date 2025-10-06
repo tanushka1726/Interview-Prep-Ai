@@ -8,6 +8,7 @@ import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import SummaryCard from '../../components/Cards/SummaryCard';
 import moment from "moment";
+import CreateSessionForm from './CreateSessionForm';
 
 
 const Dashboard = () => {
@@ -22,7 +23,8 @@ const Dashboard = () => {
   const fetchAllSessions = async () =>{
     try {
       const response = await axiosInstance.get(API_PATHS.SESSION.GET_ALL);
-      setSessions(response.data)
+      console.log("Fetched sessions:", response.data);
+      setSessions(response.data.data || []);
     } catch (error) {
       console.error("Error fetching session data:",error)
       
@@ -39,6 +41,8 @@ const Dashboard = () => {
     <DashboardLayout >
       <div className="container mx-auto pt-4 pb-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-7 pt-1 pb-6 px-4 md:px-0 ">
+          <p className="text-black">Total sessions: {sessions?.length}</p>
+
           {sessions?.map((data,index)=>( 
             <SummaryCard
             key={data?._id}
@@ -49,8 +53,8 @@ const Dashboard = () => {
             questions = {data?.questions?.length || "-"}
             description = {data?.description || ""}
             lastUpdated = {data?.updatedAt?moment(data.updatedAt).format("Do MM YYYY"):""}
-            onselect = {() => navigate(`/interview-prep/${data?._id}`)}
-            ondelete = {() => setOpenDeleteAlert({open: true , data})}
+            onSelect = {() => navigate(`/interview-prep/${data?._id}`)}
+            onDelete = {() => setOpenDeleteAlert({open: true , data})}
             />
          ) )}
         </div>
@@ -60,9 +64,19 @@ const Dashboard = () => {
       onClick={() =>setOpenCreateModal(true)}>
         <LuPlus className='text-white text-2xl'/>
         Add New
-
       </button>
       </div>
+
+     {/* <Modal isOpen={openCreateModal}
+     onClose={()=>{
+      setOpenCreateModal(false)
+     }}
+     hideHeader
+     >
+      <div> 
+        <CreateSessionForm/>
+      </div>
+     </Modal> */}
 
     </DashboardLayout>
   )
