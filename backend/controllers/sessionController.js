@@ -29,6 +29,7 @@ exports.createSession = async (req, res) => {
 
     session.questions = questionDocs;
     await session.save();
+    res.status(201).json({ success: true, session });
   } catch (error) {
     res.status(500).json({ success: false, message: "Server Error" });
   }
