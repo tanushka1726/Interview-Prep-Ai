@@ -1,60 +1,53 @@
-import React from 'react'
-import { createContext , useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import { API_PATHS } from '../utils/apiPaths';
-
-
+import { API_PATHS } from "../utils/apiPaths";
 
 export const UserContext = createContext();
 
-const UserProvider =({children}) =>{
-  const [user , setUser] = useState(null);
-  const [loading , setLoading ] =useState(true);
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-  useEffect(()=>{
-    if(user) return;
-    const accessToken  = localStorage.getItem("token");
+  // Login: store user info
+  const [loadingCheck, setLoadingCheck] = useState(true); // <-- new
 
-    if(!accessToken){
-      setLoading(false);
-      return;
-    }
-
-    const fetchUser = async () => {
+  useEffect(() => {
+    const checkLogin = async () => {
       try {
-        const response = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE);
-        setUser(response.data);
-      } catch (error) {
-        console.error("User not authenticated",error);
-        clearUser();
-        
-      }finally{
-        setLoading(false);
+        const res = await axiosInstance.get(API_PATHS.AUTH.CHECK_LOGIN, {
+          withCredentials: true,
+        });
+        setUser(res.data);
+      } catch (err) {
+        console.log("Not logged in", err); // log error
+        setUser(null);
+      } finally {
+        setLoadingCheck(false);
       }
-      
     };
+    checkLogin();
+  }, []);
+  
 
-    fetchUser();
 
-  },[] 
-);
+  const loginUser = (userData) => {
+    setUser(userData);
+  };
 
-const updateUser = (userData) =>{
-  setUser(userData);
-  localStorage.setItem("token",userData.token);
-  setLoading(false);
-}
+  // Logout: call API and clear user
+  const logoutUser = async () => {
+    try {
+      await axiosInstance.post(API_PATHS.AUTH.LOGOUT, {}, { withCredentials: true });
+      setUser(null);
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
 
-const clearUser = () =>{
-  setUser(null);
-  localStorage.removeItem("token");
+  return (
+    <UserContext.Provider value={{ user, loginUser, logoutUser, loadingCheck }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
-    return(
-      <>
-      <UserContext.Provider value={{user , loading , updateUser , clearUser}}>
-        {children}
-      </UserContext.Provider>
-      </>
-    )
-}
+
 export default UserProvider;

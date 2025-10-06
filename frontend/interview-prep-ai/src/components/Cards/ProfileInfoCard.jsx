@@ -2,15 +2,21 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {UserContext} from "../../context/userContext";
 
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from '../../utils/apiPaths';
+
 const ProfileInfoCard = () => {
     
-    const {user , clearUser} = useContext(UserContext);
     const navigate = useNavigate();
-
-    const handleLoguot = ()=>{
-      localStorage.clear();
-      clearUser();
-      navigate("/");
+    const {user, logoutUser } = useContext(UserContext);
+    const handleLogout = async () => {
+      try {
+        await axiosInstance.post( API_PATHS.AUTH.LOGOUT, {}, { withCredentials: true });
+        logoutUser(); // clear user context
+        navigate("/"); // redirect to login
+      } catch (err) {
+        console.error("Logout failed", err);
+      }
     };
   return (
    user && (
@@ -24,7 +30,7 @@ const ProfileInfoCard = () => {
           {user.name || ""}
         </div>
         <button className='text-amber-600 text-sm font-semibold cursor-pointer hover:underline'
-        onClick={handleLoguot}
+        onClick={handleLogout}
         
         >Log Out
         </button>
