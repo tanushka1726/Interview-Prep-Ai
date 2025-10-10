@@ -4,6 +4,7 @@ import { LuPlus } from "react-icons/lu";
 import DashboardLayout from '../../components/layouts/DashboardLayout';
 import { CARD_BG } from '../../utils/data';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../../components/Modal';
 
 import SummaryCard from '../../components/Cards/SummaryCard';
 import moment from "moment";
@@ -58,7 +59,7 @@ const Dashboard = () => {
     <DashboardLayout >
       <div className="container mx-auto pt-4 pb-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-7 pt-1 pb-6 px-4 md:px-0 ">
-          <p className="text-black">Dashboard login</p>
+          
 
           {isFetching ? (
             <p>Loading sessions...</p>
@@ -94,7 +95,7 @@ const Dashboard = () => {
         </button>
       </div>
 
-      {/* <Modal isOpen={openCreateModal}
+      <Modal isOpen={openCreateModal}
      onClose={()=>{
       setOpenCreateModal(false)
      }}
@@ -103,7 +104,7 @@ const Dashboard = () => {
       <div> 
         <CreateSessionForm/>
       </div>
-     </Modal> */}
+     </Modal>
 
     </DashboardLayout>
   )
