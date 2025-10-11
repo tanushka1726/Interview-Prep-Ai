@@ -66,7 +66,7 @@ const Dashboard = () => {
           ) : sessions.length === 0 ? (
             <p>No sessions found.</p>
           ) : (
-            <div>
+            <div >
               {sessions?.map((data, index) => (
                 <SummaryCard
                   key={data?._id}

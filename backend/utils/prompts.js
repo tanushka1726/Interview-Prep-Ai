@@ -28,7 +28,7 @@ Important : Do NOT add any extra text. Only return valid JSON.
 `;
 
 const conceptExplainPrompt = (question) => `
-    Your are an AI trained to generate exlanations for a given interview question
+    Your are an AI trained to generate explanations for a given interview question
 
     Task:
     -Explain the following interview question and its concept in depth as if you're teaching a biginner developer.

@@ -17,6 +17,8 @@ const SummaryCard = (
 
 ) => {
   return (
+    <>
+    <div className="mb-5">
     <div className='bg-white border border-gray-300/40 rounded-xl p-2 overflow-hidden cursor-pointer hover:shadow-xl shadow-gray-100 relative group' 
     onClick={onSelect}>
       <div className="rounded-lg p-4 cursor-pointer relative" style={{ background: colors.bgcolor }}
@@ -61,6 +63,8 @@ const SummaryCard = (
       </div>
       
     </div>
+    </div>
+    </>
   )
 }
 
