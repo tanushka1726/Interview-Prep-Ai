@@ -9,14 +9,14 @@ const QuestionCard = ({
     isPinned,
     onTogglePin
 }) => {
-    const [isExpanded , setIsExpanded]=useState(flase);
+    const [isExpanded , setIsExpanded]= useState(false);
     const [height , setHeight]=useState(0);
     const contentRef = useRef(null);
 
     useEffect(()=>{
         if(isExpanded){
             const contentHeight = contentRef.current.scrollHeight;
-            setHeight(contentHeight+10);
+            setHeight(contentHeight + 10);
         }else{
             setHeight(0);
         }

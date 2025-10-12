@@ -12,6 +12,7 @@ import CreateSessionForm from './CreateSessionForm';
 import { UserContext } from '../../context/userContext';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
+import DeleteAlertContent from '../../components/DeleteAlertContent';
 
 const Dashboard = () => {
   const { user, loading } = useContext(UserContext);
@@ -37,6 +38,19 @@ const Dashboard = () => {
       setIsFetching(false);
     }
   };
+
+  const deleteSession = async()=>{
+    try {
+      await axiosInstance.delete(API_PATHS.SESSION.DELETE(sessionData?._id));
+      toast.success("Session Deleted Successfully")
+      setOpenDeleteAlert({open:false , data:null});
+      fetchAllSessions();
+      
+    } catch (error) {
+      console.error("Error deleteing session data :",error);
+      
+    }
+  }
   
   useEffect(() => {
     fetchAllSessions();
@@ -104,6 +118,20 @@ const Dashboard = () => {
       <div> 
         <CreateSessionForm/>
       </div>
+     </Modal>
+
+     <Modal isOpen={openDeleteAlert?.open}
+      onClose={()=>{
+        setOpenDeleteAlert({open:false , data:null});
+      }}
+      title="Delete Alert"
+      > 
+      <div className="w-[30vw]">
+        <DeleteAlertContent content="Are you sure you want to delete this session details?"
+        onDelete={()=>deleteSession(openDeleteAlert.data)}
+        />
+      </div>
+
      </Modal>
 
     </DashboardLayout>
