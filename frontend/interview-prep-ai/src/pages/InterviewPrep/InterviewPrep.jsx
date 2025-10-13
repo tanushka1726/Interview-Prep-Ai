@@ -82,10 +82,10 @@ const InterviewPrep = () => {
         numberOfQuestions:10
       });
 
-      const generateQuestions = aiResponse.data;
+      const generatedQuestions = aiResponse.data;
       const response = await axiosInstance.post(API_PATHS.QUESTION.ADD_TO_SESSION,{
         sessionId,
-        question:generateQuestions,
+        questions:generatedQuestions,
       });
       if(response.data){
         toast.success("Added More Q&A !!");
@@ -150,9 +150,9 @@ useEffect(()=>{
                     <QuestionCard
                     question={data?.question}
                     answer={data?.answer}
-                    onLearnMore = {()=>{
+                    onLearnMore = {()=>
                       generateConceptExplanation(data.question)
-                    }}
+                    }
                     isPinned={data?.isPinned}
                     onTooglePin ={()=> toogleQuestionPinStatus(data._id)}
                     />
@@ -168,7 +168,7 @@ useEffect(()=>{
                             <SpinnerLoader/>
                           ):(
                             <LuListCollapse className='text-lg'/>
-                          )} {""}
+                          )}{""}
                           Load more
                         </button>
                       </div>

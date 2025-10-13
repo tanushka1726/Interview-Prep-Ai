@@ -41,7 +41,7 @@ const QuestionCard = ({
             <div className={`flex ${isExpanded ? "md:flex" : "md:hidden group-hover:flex"}`}>
                 <button className='flex items-center text-xs text-indigo-800 font-medium bg-indigo-50 px-3 py-1 mr-2 rounded text-nowrap border border-indigo-50 hover:border-indigo-200 cursor-pointer'
                  onClick={onTogglePin}>
-                    {isPinned?(
+                    {isPinned ? (
                         <LuPinOff className='text-xs'/>
                     ) :(
                         <LuPin className='text-xs'/>
