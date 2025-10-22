@@ -182,7 +182,7 @@ useEffect(()=>{
           </div>
         </div>
 
-        <div className="">
+        <div>
           <Drawer 
           isOpen={openLeanMoreDrawer}
           onClose={()=>setOpenLeanDrawer(false)}
