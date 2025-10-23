@@ -39,9 +39,9 @@ const Dashboard = () => {
     }
   };
 
-  const deleteSession = async()=>{
+  const deleteSession = async(id)=>{
     try {
-      await axiosInstance.delete(API_PATHS.SESSION.DELETE(sessionData?._id));
+      await axiosInstance.delete(API_PATHS.SESSION.DELETE(id));
       toast.success("Session Deleted Successfully")
       setOpenDeleteAlert({open:false , data:null});
       fetchAllSessions();
@@ -128,7 +128,7 @@ const Dashboard = () => {
       > 
       <div className="w-[30vw]">
         <DeleteAlertContent content="Are you sure you want to delete this session details?"
-        onDelete={()=>deleteSession(openDeleteAlert.data)}
+        onDelete={()=>deleteSession(openDeleteAlert.data?._id)}
         />
       </div>
 
