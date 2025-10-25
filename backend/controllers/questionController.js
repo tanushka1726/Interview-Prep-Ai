@@ -5,7 +5,7 @@ exports.addQuestionsToSession = async (req, res) => {
   try {
     const { sessionId, questions } = req.body;
 
-    if (!sessionId || !questions || Array.isArray(questions)) {
+    if (!sessionId || !questions || !Array.isArray(questions)) {
       return res.status(400).json({ message: "Invalid input data" });
     }
     const session = await Session.findById(sessionId);
