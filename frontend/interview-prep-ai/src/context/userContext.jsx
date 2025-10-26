@@ -5,7 +5,7 @@ import { API_PATHS } from "../utils/apiPaths";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const url = " https://interview-prep-ai-gexk.onrender.com"
+  
   const [user, setUser] = useState(null);
 
   // Login: store user info

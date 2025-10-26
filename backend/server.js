@@ -20,7 +20,10 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://interview-prep-ai-1-q9kt.onrender.com",
+    origin: [
+      "https://interview-prep-ai-1-q9kt.onrender.com",
+      "http://localhost:5173",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-type", "Authorization"],
     credentials: true,
