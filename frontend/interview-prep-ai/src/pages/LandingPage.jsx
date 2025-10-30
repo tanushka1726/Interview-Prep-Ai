@@ -94,8 +94,8 @@ const LandingPage = () => {
               ))}
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {APP_FEATURES.slice(3).map((feature) => (
-                  <div className="bg-[#FFFEF8] p-6 rounded-xl shadow-xs hover:shadow-lg shadow-amber-100 transition border border-amber-100" key={feature}>
+                {APP_FEATURES.slice(3).map((feature, index) => (
+                  <div className="bg-[#FFFEF8] p-6 rounded-xl shadow-xs hover:shadow-lg shadow-amber-100 transition border border-amber-100" key={index}>
                     <h3 className="text-base font-semibold mb-3">{feature.title}</h3>
                     <p className='text-gray-600'>{feature.description}</p>
                   </div>
