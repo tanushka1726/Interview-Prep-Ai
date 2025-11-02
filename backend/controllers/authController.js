@@ -11,14 +11,17 @@ const registerUser = async (req, res) => {
   try {
     const { name, email, password, profileImageUrl } = req.body;
 
+    // Check if user already exists
     const userExists = await User.findOne({ email });
-
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
 
+    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create user
     const user = await User.create({
       name,
       email,
@@ -26,14 +29,27 @@ const registerUser = async (req, res) => {
       profileImageUrl,
     });
 
-    res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      password: user.password,
-      profileImageUrl: user.profileImageUrl,
-      token: generateToken(user._id),
-    });
+    // Generate token
+    const token = generateToken(user._id);
+
+    // ✅ Send JWT in HTTP-only cookie
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // cookie only on HTTPS in prod
+        sameSite: "Lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      })
+      .status(201)
+      .json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        profileImageUrl: user.profileImageUrl,
+        message: "User registered successfully",
+      });
   } catch (error) {
+    console.error("Error registering user:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
