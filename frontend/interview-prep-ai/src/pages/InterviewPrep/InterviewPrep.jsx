@@ -156,7 +156,7 @@ useEffect(()=>{
                       generateConceptExplanation(data.question)
                     }
                     isPinned={data?.isPinned}
-                    onTooglePin ={()=> toogleQuestionPinStatus(data._id)}
+                    onTogglePin ={()=> toogleQuestionPinStatus(data._id)}
                     />
                     {!isLoading &&
                     sessionData?.questions?.length == index + 1 &&(
