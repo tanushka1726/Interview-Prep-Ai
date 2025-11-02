@@ -158,7 +158,6 @@ useEffect(()=>{
                     isPinned={data?.isPinned}
                     onTooglePin ={()=> toogleQuestionPinStatus(data._id)}
                     />
-                    
                     {!isLoading &&
                     sessionData?.questions?.length == index + 1 &&(
                       <div className="flex items-center justify-center mt-5">
