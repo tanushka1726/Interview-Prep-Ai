@@ -1,0 +1,56 @@
+# ======================
+# Dependencies (ALL)
+# ======================
+**/node_modules/
+
+# ======================
+# Environment files (ALL)
+# ======================
+**/.env
+**/.env.*
+!**/.env.example
+
+# ======================
+# Backend build & runtime
+# ======================
+backend/dist/
+backend/build/
+backend/coverage/
+backend/logs/
+backend/*.log
+
+# ======================
+# Frontend (Vite / React / Svelte)
+# ======================
+frontend/**/dist/
+frontend/**/build/
+frontend/**/.svelte-kit/
+frontend/**/.next/
+frontend/**/.output/
+
+# ======================
+# Frontend cache
+# ======================
+frontend/**/.vite/
+frontend/**/.turbo/
+
+# ======================
+# Logs (ALL)
+# ======================
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ======================
+# OS files
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# Editor / IDE
+# ======================
+.vscode/
+.idea/
+*.swp
