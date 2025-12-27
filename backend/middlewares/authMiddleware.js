@@ -5,9 +5,7 @@ const protect = async (req, res, next) => {
    console.log("Headers.cookie:", req.headers.cookie);
   console.log("req.cookies:", req.cookies);
   try {
-    // Get token from cookie
-    const token = req.cookies.token;
-
+  
     if (!token) {
       return res.status(401).json({ message: "Not authorized, no token" });
     }
