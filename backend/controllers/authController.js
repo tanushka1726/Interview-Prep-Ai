@@ -70,14 +70,14 @@ const loginUser = async (req, res) => {
 
     const token = generateToken(user._id);
 
+    const isProd = process.env.NODE_ENV === "production";
     // ✅ set cookie
     res.cookie("token", token, {
-      httpOnly: true, // cannot be accessed via JS
-      sameSite: "strict", // CSRF protection
-      // secure: process.env.NODE_ENV === "production", // enable in prod
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      httpOnly: true,
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-
     // ✅ send response
     res.json({
       _id: user._id,
